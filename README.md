@@ -27,7 +27,7 @@
   * [Babel](https://babeljs.io/)
 
 ## Get Started
-1. git clone https://github.com/cloudshadow/react-redux-starter-kit.git
+1. git clone https://github.com/cloudshadow/team-topic-view.git
 2. npm install
 3. npm start
 
