@@ -1,0 +1,10 @@
+.login-container {
+  text-align: center;
+  .form-group{
+    margin: 0 auto;
+    width: 50vw;
+    input, button{
+      margin-top: 1rem;
+    }
+  }
+}

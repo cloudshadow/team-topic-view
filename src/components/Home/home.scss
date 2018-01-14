@@ -1,0 +1,44 @@
+.home-container {
+  .color-cell {
+    width: 33.3%;
+    height: 5rem;
+    float: left;
+  }
+  .select-container, .colors-container, .post-container{
+    padding-top: 1rem;
+  }
+  .post-container{
+    input{
+      border: 0;
+      border-bottom: 1px solid #ddd;
+      border-radius: 0;
+    }
+    textarea{
+      border: 0;
+      border-radius: 0;
+      resize: none;
+    }
+    .btn {
+      border-top: 2px solid #fff;
+      border-radius: 0;
+    }
+  }
+  .posts-container {
+    height: 100vh;
+  }
+  .movable-post-container{
+    padding: .3rem;
+    position: absolute;
+    z-index: 100;
+    box-shadow: 5px 5px 10px rgba(0,0,0,.3);
+    .title {
+      font-size:1.5rem;
+      color: #999;
+    }
+    .author {
+      font-size:.8rem;
+      color: #999;
+    }
+    
+  }
+}
