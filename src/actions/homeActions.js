@@ -1,6 +1,21 @@
 import 'es6-promise/auto'; //import es6-promise for ie
 import axios from 'axios';
+import io from 'socket.io-client';
 import urlHelper from '../utils/urlHelper';
+
+const postsSocket = io(urlHelper.t('graphql'));
+
+export const GET_MODIFIED_TEAM_POST_SUCCESS = 'GET_MODIFIED_TEAM_POST_SUCCESS';
+export const GET_MODIFIED_TEAM_POST_FAILED = 'GET_MODIFIED_TEAM_POST_FAILED';
+export function getModifiedTeamPost(teamId){
+  return dispatch => {
+    postsSocket.on('connection', (data) => {
+      console.log(data);
+      dispatch({ type: GET_MODIFIED_TEAM_POST_SUCCESS });
+    });
+  }
+}
+
 
 export const GET_TEAM_POSTS_SUCCESS = 'GET_TEAM_POSTS_SUCCESS';
 export const GET_TEAM_POSTS_FAILED = 'GET_TEAM_POSTS_FAILED';

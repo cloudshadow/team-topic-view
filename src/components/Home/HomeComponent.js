@@ -38,6 +38,7 @@ export default class HomeComponent extends React.Component{
   }
 
   componentDidMount() {
+    this.props.getModifiedTeamPost(this.props.authState.user.teams[0].id);
     this.props.getTeamPosts(this.props.authState.user.teams[0].id);
   }
 
@@ -196,6 +197,7 @@ HomeComponent.propTypes = {
   createTeamPost: PropTypes.func.isRequired,
   updateTeamPost: PropTypes.func.isRequired,
   getTeamPosts: PropTypes.func.isRequired,
+  getModifiedTeamPost: PropTypes.func.isRequired,
   homeState: PropTypes.object.isRequired,
   authState: PropTypes.object.isRequired,
 };

@@ -8,6 +8,7 @@ export class HomePage extends React.Component {
   render() {
     return (
       <HomeComponent
+        getModifiedTeamPost = {this.props.homeActions.getModifiedTeamPost}
         getTeamPosts = {this.props.homeActions.getTeamPosts}
         createTeamPost = {this.props.homeActions.createTeamPost}
         updateTeamPost =  {this.props.homeActions.updateTeamPost}
