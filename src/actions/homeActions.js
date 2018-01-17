@@ -1,20 +1,34 @@
 import 'es6-promise/auto'; //import es6-promise for ie
 import axios from 'axios';
-import io from 'socket.io-client';
+// import io from 'socket.io-client';
 import urlHelper from '../utils/urlHelper';
+// import { WebSocketLink } from 'apollo-link-ws';
+// import { ApolloClient } from 'apollo-client';
+// import { InMemoryCache } from 'apollo-cache-inmemory';
+// import gql from 'graphql-tag';
 
-const postsSocket = io(urlHelper.t('graphql'));
+// const client = new ApolloClient({
+//   // By default, this client will send queries to the
+//   //  `/graphql` endpoint on the same host
+//   // Pass the configuration option { uri: YOUR_GRAPHQL_API_URL } to the `HttpLink` to connect
+//   // to a different host
+//   link: new WebSocketLink({
+//     uri: 'ws://localhost:4000/subscriptions',
+//     options: { reconnect: true },
+//   }),
+//   cache: new InMemoryCache()
+// });
 
-export const GET_MODIFIED_TEAM_POST_SUCCESS = 'GET_MODIFIED_TEAM_POST_SUCCESS';
-export const GET_MODIFIED_TEAM_POST_FAILED = 'GET_MODIFIED_TEAM_POST_FAILED';
-export function getModifiedTeamPost(teamId){
-  return dispatch => {
-    postsSocket.on('connection', (data) => {
-      console.log(data);
-      dispatch({ type: GET_MODIFIED_TEAM_POST_SUCCESS });
-    });
-  }
-}
+// export const GET_MODIFIED_TEAM_POST_SUCCESS = 'GET_MODIFIED_TEAM_POST_SUCCESS';
+// export const GET_MODIFIED_TEAM_POST_FAILED = 'GET_MODIFIED_TEAM_POST_FAILED';
+// export function getModifiedTeamPost(teamId){
+//   return dispatch => {
+//     postsSocket.on('connection', (data) => {
+//       console.log(data);
+//       dispatch({ type: GET_MODIFIED_TEAM_POST_SUCCESS });
+//     });
+//   }
+// }
 
 
 export const GET_TEAM_POSTS_SUCCESS = 'GET_TEAM_POSTS_SUCCESS';
@@ -158,3 +172,63 @@ export function updateTeamPost(post, originPosts) {
     });
   };
 }
+
+
+// export const UPDATE_TEAM_POST_SUCCESS = 'UPDATE_TEAM_POST_SUCCESS';
+// export const UPDATE_TEAM_POST_FAILED = 'UPDATE_TEAM_POST_FAILED';
+// export function updateTeamPost(post, originPosts) {
+//   return dispatch => {
+//     client.subscribe({
+//       query: gql`
+//         subscription {
+//           updatePost(
+//             id: ${post.id},
+//             author: "${post.author}",
+//             title:  "${post.title}",
+//             desc:  "${post.desc}",
+//             zindex: ${post.zindex},
+//             positionx: ${post.positionx},
+//             positiony: ${post.positiony},
+//             height: ${post.height},
+//             width: ${post.width},
+//             color:  "${post.color}",
+//             status: ${post.status}
+//           ){
+//             id,
+//             author,
+//             title,
+//             desc,
+//             positionx,
+//             positiony,
+//             height,
+//             width,
+//             color,
+//             status,
+//             team_id
+//           }
+//         }
+//       `
+//     }).then( function(response) {
+//       console.log(11111)
+//       const { data: { updatePost } } = response;
+//       const posts = originPosts;
+//       originPosts[originPosts.findIndex(post => post.id === updatePost.id)] = updatePost;
+//       dispatch({ type: UPDATE_TEAM_POST_SUCCESS, posts });
+//     }).catch(error => {
+//       if(error.response.status >= 400 && error.response.status !== 401) {
+//         dispatch({ type: UPDATE_TEAM_POST_FAILED, error });
+//       }
+//     });
+//   };
+// }
+
+
+
+
+
+// const wsLink = new WebSocketLink({
+//   uri: `ws://localhost:4000/subscriptions`,
+//   options: {
+//     reconnect: true
+//   }
+// });
