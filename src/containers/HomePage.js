@@ -2,8 +2,6 @@ import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { compose, withApollo } from 'react-apollo';
-import { graphql } from 'react-apollo';
-import gql from 'graphql-tag';
 import * as homeActions from '../actions/homeActions';
 import HomeComponent from '../components/Home/HomeComponent';
 
@@ -15,6 +13,7 @@ export class HomePage extends React.Component {
         getTeamPosts = {this.props.homeActions.getTeamPosts}
         createTeamPost = {this.props.homeActions.createTeamPost}
         updateTeamPost =  {this.props.homeActions.updateTeamPost}
+        liveUpdatedTeamPost =  {this.props.homeActions.liveUpdatedTeamPost}
         homeState = {this.props.homeState}
         authState = {this.props.authState}
       />
@@ -44,16 +43,8 @@ function mapDispatchToProps(dispatch) {
 
 export default compose(
   withApollo,
-  // graphql(channelsListQuery, {
-  //   options: { pollInterval: 5000 },
-  // }),
   connect(
     mapStateToProps,
     mapDispatchToProps
   )
 )(HomePage);
-
-// export default connect(
-//   mapStateToProps,
-//   mapDispatchToProps
-// )(HomePage);

@@ -4,7 +4,8 @@ import {
   CREATE_TEAM_POST_SUCCESS,
   CREATE_TEAM_POST_FAILED,
   UPDATE_TEAM_POST_SUCCESS,
-  UPDATE_TEAM_POST_FAILED
+  UPDATE_TEAM_POST_FAILED,
+  LIVE_UPDATED_TEAM_POST_SUCCESS
 } from '../actions/homeActions';
 import objectAssign from 'object-assign';
 
@@ -42,6 +43,11 @@ export default (state = initialState, action) => {
       return {
         ...state,
         error: action.error
+      };
+    case LIVE_UPDATED_TEAM_POST_SUCCESS:
+      return {
+        ...state,
+        posts: action.posts
       };
     default:
       return state;

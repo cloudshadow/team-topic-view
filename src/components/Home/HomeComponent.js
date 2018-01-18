@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import './home.scss';
 import objectAssign from 'object-assign';
+import gql from 'graphql-tag';
 
 export default class HomeComponent extends React.Component{
   constructor(props) {
@@ -21,7 +22,7 @@ export default class HomeComponent extends React.Component{
       title: '',
       desc: '',
       currentColor: '#FFFF99',
-      teamId: 0,
+      teamId: this.props.authState.user.teams[0].id,
       currentDragablePost:''
     };
     this.handleChange = this.handleChange.bind(this);
@@ -38,8 +39,36 @@ export default class HomeComponent extends React.Component{
   }
 
   componentDidMount() {
-    console.log(this.props.client)
     this.props.getTeamPosts(this.props.authState.user.teams[0].id);
+  }
+
+  componentWillMount() {
+    this.props.client.subscribe({
+      query: gql`
+        subscription {
+          updatedPost(
+            team_id: ${this.state.teamId},
+          ){
+            id,
+            author,
+            title,
+            desc,
+            positionx,
+            positiony,
+            height,
+            width,
+            color,
+            status,
+            team_id
+          }
+        }
+      `
+    }).subscribe( response => {
+      const {data:{updatedPost}} = response;
+      this.props.homeState.posts.findIndex(post => post.id === updatedPost.id) === -1
+      ? this.props.getTeamPosts(this.state.teamId)
+      : this.props.liveUpdatedTeamPost(updatedPost,objectAssign([], this.props.homeState.posts));
+    });
   }
 
   componentDidUpdate() {
@@ -196,6 +225,7 @@ export default class HomeComponent extends React.Component{
 HomeComponent.propTypes = {
   createTeamPost: PropTypes.func.isRequired,
   updateTeamPost: PropTypes.func.isRequired,
+  liveUpdatedTeamPost: PropTypes.func.isRequired,
   getTeamPosts: PropTypes.func.isRequired,
   homeState: PropTypes.object.isRequired,
   authState: PropTypes.object.isRequired,

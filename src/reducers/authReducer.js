@@ -3,7 +3,6 @@ import {
   LOGIN_FAILED,
   RELOAD_AUTH
 } from '../actions/authActions';
-// import objectAssign from 'object-assign';
 
 const initialState = {
   user: null,
