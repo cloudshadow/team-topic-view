@@ -101,6 +101,7 @@ export default class HomeComponent extends React.Component{
     this.currentDragablePost.style.zIndex = this.nextIndex;
     const style = window.getComputedStyle(event.target, null);
     this.offsetData = (parseInt(style.getPropertyValue("left")) - parseInt(event.clientX)) + ',' + (parseInt(style.getPropertyValue("top")) - parseInt(event.clientY));
+    event.dataTransfer.setData("text/plain",this.offsetData);
   }
 
   handleOnDragOver(event){
