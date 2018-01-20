@@ -38,10 +38,6 @@ export default class HomeComponent extends React.Component{
     this.nextIndex = 100;
   }
 
-  componentDidMount() {
-    this.props.getTeamPosts(this.props.authState.user.teams[0].id);
-  }
-
   componentWillMount() {
     this.props.client.subscribe({
       query: gql`
@@ -71,7 +67,8 @@ export default class HomeComponent extends React.Component{
     });
   }
 
-  componentDidUpdate() {
+  componentDidMount() {
+    this.props.getTeamPosts(this.props.authState.user.teams[0].id);
   }
 
   setCurrentPostColor(event,color) {
